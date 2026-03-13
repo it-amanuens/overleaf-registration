@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  overleaf-registration:
+    build: .
+    container_name: overleaf-registration
+    env_file:
+      - .env
+    ports:
+      - "5002:8000"
+    restart: unless-stopped
+    networks:
+      - traefik-servicenet
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.overleaf-register.rule=Host(`tools.lu.umu.se`) && PathPrefix(`/register`)"
+      - "traefik.http.routers.overleaf-register.entrypoints=web-secure"
+      - "traefik.http.routers.overleaf-register.tls=true"
+      - "traefik.http.routers.overleaf-register.tls.certresolver=tlschallenge"
+      - "traefik.http.routers.overleaf-register.priority=100"
+      - "traefik.http.services.overleaf-register.loadbalancer.server.port=8000"
+
+networks:
+  traefik-servicenet:
+    external: true

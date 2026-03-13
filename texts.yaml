@@ -1,0 +1,48 @@
+# Page titles and headers
+#title: "Tekniskfysik Overleaf Registration"
+#header: "Tekniskfysik Overleaf Registration"
+
+# Form elements
+#email_placeholder: "your.email@student.umu.se"
+#email_help_text: "We suggest you to use your @umu.se or @student.umu.se email."
+#register_button: "Register"
+
+# Messages
+#success_message: "Registration successful! A confirmation email has been sent to {email}."
+#success_title: "Registration Complete"
+#login_button: "Login"
+
+# Error messages
+#error_ip_restricted: "Registration is only available from University networks (register on campus). Your IP: {ip}"
+#error_invalid_email: "Invalid email or domain not allowed."
+#error_incorrect_key: "Incorrect verification key. Please try again."
+#error_server: "System error. Please try again later or contact administrator."
+
+# Navigation elements
+#navbar_brand: "Overleaf Tekniskfysik"
+
+
+
+
+# Page titles and headers
+title: "Tekniskfysik Latex "
+header: "Tekniskfysik Latex Registration"
+
+# Form elements
+email_placeholder: "your-UMU-ID@student.umu.se"
+email_help_text: "We suggest you to use your @student.umu.se email."
+register_button: "register"
+
+# Messages
+success_message: "Registration successful! A confirmation email has been sent to {email}."
+success_title: "Registration Complete"
+login_button: "Login"
+
+# Error messages
+error_ip_restricted: "Registration is only available from University networks (register on campus). Your IP: {ip}"
+error_invalid_email: "Invalid email or domain not allowed."
+error_incorrect_key: "Incorrect verification key. Please try again."
+error_server: "System error. Please try again later or contact administrator."
+
+# Navigation elements
+navbar_brand: "Tekniskfysik Latex"
