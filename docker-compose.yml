@@ -9,8 +9,6 @@ services:
     ports:
       - "5002:8000"
     restart: unless-stopped
-    networks:
-      - traefik-servicenet
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.overleaf-register.rule=Host(`tools.lu.umu.se`) && PathPrefix(`/register`)"
@@ -20,6 +18,3 @@ services:
       - "traefik.http.routers.overleaf-register.priority=100"
       - "traefik.http.services.overleaf-register.loadbalancer.server.port=8000"
 
-networks:
-  traefik-servicenet:
-    external: true

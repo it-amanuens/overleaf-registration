@@ -62,3 +62,39 @@ The Docker container needs all the following environment variables to function p
 | `OL_INSTANCE`        | Overleaf self-hosted instance (without trailing `/`) |
 | `OL_ADMIN_EMAIL`     | Overleaf administrator account email                 |
 | `OL_ADMIN_PASSWORD`  | Overleaf administrator account password              |
+
+## Daily admin system message
+
+This project now supports automatic refresh of the Overleaf admin system message.
+The scheduler performs these steps every day:
+
+1. Log in as admin
+2. Clear all existing system messages
+3. Post `DAILY_SYSTEM_MESSAGE`
+4. Log out
+
+### Environment variables
+
+Add these to `.env` (see `example.env`):
+
+| Environment variable      | Description |
+|---------------------------|-------------|
+| `DAILY_MESSAGE_ENABLED`   | Set to `true` or `false` to enable/disable the daily job |
+| `DAILY_SYSTEM_MESSAGE`    | Message text posted daily after clearing existing messages |
+
+### Scheduler behavior
+
+The existing `overleaf-registration` container runs both:
+
+1. `gunicorn` for the `/register` web app
+2. A cron job that executes `daily_message_job.py` every day at `06:00` (`Europe/Stockholm`)
+
+### Manual test
+
+Run a one-shot test before relying on the schedule:
+
+```bash
+docker compose run --rm overleaf-registration python /daily_message_job.py
+```
+
+Then check Overleaf Admin -> System Messages to verify that only the configured message is present.

@@ -20,6 +20,11 @@ class Overleaf:
         data["_csrf"] = self._csrf
         return self.session.post(url, json=data)
 
+    @staticmethod
+    def _ensure_success(response: requests.Response, action: str) -> None:
+        if response.status_code >= 400:
+            raise RuntimeError(f"failed to {action}: status={response.status_code}")
+
     def _init_session(self) -> None:
         self._get("/")
 
@@ -34,12 +39,24 @@ class Overleaf:
             "password": password,
         })
         if r.status_code != 200:
-            raise ValueError("incorrect email or password")
+            raise ValueError(f"incorrect email or password (status={r.status_code})")
 
     def logout(self) -> None:
-        self._post("/logout")
+        resp = self._post("/logout")
+        self._ensure_success(resp, "logout")
 
     def register_user(self, email) -> None:
-        self._post("/admin/register", data={
+        resp = self._post("/admin/register", data={
             "email": email,
         })
+        self._ensure_success(resp, "register user")
+
+    def clear_system_messages(self) -> None:
+        resp = self._post("/admin/messages/clear")
+        self._ensure_success(resp, "clear system messages")
+
+    def post_system_message(self, content: str) -> None:
+        resp = self._post("/admin/messages", data={
+            "content": content,
+        })
+        self._ensure_success(resp, "post system message")

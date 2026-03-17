@@ -1,9 +1,12 @@
-FROM python:slim
+FROM python:alpine
+
+RUN apk add --no-cache tzdata
 
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
 COPY . .
+RUN chmod +x /entrypoint.sh
 
 EXPOSE 8000
-ENTRYPOINT ["/bin/bash", "-c", "gunicorn wsgi:app --bind 0.0.0.0:8000 --env OL_INSTANCE=$OL_INSTANCE --env OL_ADMIN_EMAIL=$OL_ADMIN_EMAIL --env OL_ADMIN_PASSWORD=$OL_ADMIN_PASSWORD"]
+ENTRYPOINT ["/entrypoint.sh"]
