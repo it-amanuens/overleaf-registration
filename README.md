@@ -6,7 +6,11 @@ mer eller mindre fyll i texts.yaml med korrekt information och sen kompilera hel
 changes är från 2025-06-08, finns några fler saker som skulle kunna implementeras. 
 
 
+Kolla gärna på example.env filen, där har vi en hel del configs som kan göras för just detta projekt
 
+Vi stödjer bland annat ip whitelist. 
+Vi stödjer dagliga meddelanden
+Vi stödjer registrering med specifik address, och man kan även lägga till frågor (Exempelvis vad heter eran rektor).
 
 
 
